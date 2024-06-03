@@ -1,0 +1,36 @@
+{
+  "name": "nodejs-graphql-fake-api",
+  "version": "1.0.0",
+  "description": "NodeJS with graphQL API for providing fake data",
+  "main": "src/index.ts",
+  "repository": "https://github.com/ahmedalatawi/nodejs-graphql-fake-api",
+  "author": "Ahmed Alatawi",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "start": "node ./dist/index.js",
+    "dev": "nodemon ./src/index.ts"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.3.1",
+    "@graphql-tools/schema": "^9.0.13",
+    "@prisma/client": "^4.9.0",
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "graphql": "^16.6.0",
+    "graphql-tag": "^2.12.6",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^18.11.18",
+    "nodemon": "^2.0.20",
+    "prisma": "^5.14.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  }
+}
