@@ -6,8 +6,8 @@ import http from "http";
 import cors from "cors";
 import { json } from "body-parser";
 import * as dotenv from "dotenv";
-import typeDefs from "./graphql/typeDefs";
-import resolvers from "./graphql/resolvers";
+import typeDefs from "../src/graphql/typeDefs";
+import resolvers from "../src/graphql/resolvers";
 import { PrismaClient } from "@prisma/client";
 
 dotenv.config();
