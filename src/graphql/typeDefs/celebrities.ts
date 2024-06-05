@@ -19,7 +19,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    getCelebrities: [Celebrity]
+    celebrities: [Celebrity]
   }
 
   type Mutation {

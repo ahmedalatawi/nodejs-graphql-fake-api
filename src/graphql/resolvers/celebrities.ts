@@ -5,7 +5,7 @@ import { GraphQLContext, Celebrity as ICelebrity } from "../../util/types";
 
 const resolvers = {
   Query: {
-    getCelebrities: async function getCelebrities(
+    celebrities: async function celebrities(
       _: any,
       __: any,
       context: GraphQLContext
@@ -15,7 +15,7 @@ const resolvers = {
       try {
         return await prisma.celebrity.findMany();
       } catch (error: any) {
-        console.error("getCelebrities: ", error);
+        console.error("celebrities: ", error);
         throw new GraphQLError(error?.message);
       }
     },
