@@ -19,6 +19,25 @@ const resolvers = {
         throw new GraphQLError(error?.message);
       }
     },
+    celebrity: async function celebrity(
+      _: any,
+      args: { id: string },
+      context: GraphQLContext
+    ) {
+      const { id } = args;
+      const { prisma } = context;
+
+      try {
+        return await prisma.celebrity.findUnique({
+          where: {
+            id,
+          },
+        });
+      } catch (error: any) {
+        console.error("celebrity: ", error);
+        throw new GraphQLError(error?.message);
+      }
+    },
   },
   Mutation: {
     createCelebrity: async function createCelebrity(

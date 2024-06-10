@@ -19,6 +19,7 @@ const typeDefs = gql`
   }
 
   type Query {
+    celebrity(id: ID!): Celebrity
     celebrities: [Celebrity]
   }
 
