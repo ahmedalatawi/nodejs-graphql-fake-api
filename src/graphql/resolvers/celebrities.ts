@@ -1,6 +1,9 @@
 import { Celebrity } from "@prisma/client";
 import { GraphQLError } from "graphql";
-import { verifyAndCreateCelebrity } from "../../util/functions";
+import {
+  verifyAndCreateCelebrity,
+  verifyAndUpdateCelebrity,
+} from "../../util/functions";
 import { GraphQLContext, Celebrity as ICelebrity } from "../../util/types";
 
 const resolvers = {
@@ -52,6 +55,21 @@ const resolvers = {
         return await verifyAndCreateCelebrity(celebrity, prisma);
       } catch (error: any) {
         console.error("createCelebrity: ", error);
+        throw new GraphQLError(error?.message);
+      }
+    },
+    updateCelebrity: async function updateCelebrity(
+      _: any,
+      args: { celebrity: ICelebrity },
+      context: GraphQLContext
+    ): Promise<Celebrity> {
+      const { prisma } = context;
+      const { celebrity } = args;
+
+      try {
+        return await verifyAndUpdateCelebrity(celebrity, prisma);
+      } catch (error: any) {
+        console.error("updateCelebrity: ", error);
         throw new GraphQLError(error?.message);
       }
     },

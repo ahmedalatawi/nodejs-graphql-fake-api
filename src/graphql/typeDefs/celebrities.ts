@@ -12,6 +12,7 @@ const typeDefs = gql`
   }
 
   input CelebrityInput {
+    id: ID
     name: String!
     bio: String
     dateOfBirth: Date!
@@ -25,6 +26,7 @@ const typeDefs = gql`
 
   type Mutation {
     createCelebrity(celebrity: CelebrityInput!): Celebrity
+    updateCelebrity(celebrity: CelebrityInput!): Celebrity
   }
 `;
 
