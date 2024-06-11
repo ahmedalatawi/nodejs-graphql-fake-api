@@ -11,3 +11,7 @@ export interface Celebrity {
 export interface GraphQLContext {
   prisma: PrismaClient;
 }
+
+export type BatchPayload = {
+  count: number;
+};

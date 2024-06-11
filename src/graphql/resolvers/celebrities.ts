@@ -4,7 +4,11 @@ import {
   verifyAndCreateCelebrity,
   verifyAndUpdateCelebrity,
 } from "../../util/functions";
-import { GraphQLContext, Celebrity as ICelebrity } from "../../util/types";
+import {
+  BatchPayload,
+  GraphQLContext,
+  Celebrity as ICelebrity,
+} from "../../util/types";
 
 const resolvers = {
   Query: {
@@ -70,6 +74,39 @@ const resolvers = {
         return await verifyAndUpdateCelebrity(celebrity, prisma);
       } catch (error: any) {
         console.error("updateCelebrity: ", error);
+        throw new GraphQLError(error?.message);
+      }
+    },
+    deleteCelebrity: async function deleteCelebrity(
+      _: any,
+      args: { id: string },
+      context: GraphQLContext
+    ): Promise<Celebrity> {
+      const { prisma } = context;
+      const { id } = args;
+
+      try {
+        return await prisma.celebrity.delete({
+          where: {
+            id,
+          },
+        });
+      } catch (error: any) {
+        console.error("deleteCelebrity: ", error);
+        throw new GraphQLError(error?.message);
+      }
+    },
+    deleteAllCelebrities: async function deleteAllCelebrities(
+      _: any,
+      __: any,
+      context: GraphQLContext
+    ): Promise<BatchPayload> {
+      const { prisma } = context;
+
+      try {
+        return await prisma.celebrity.deleteMany({});
+      } catch (error: any) {
+        console.error("deleteAllCelebrities: ", error);
         throw new GraphQLError(error?.message);
       }
     },

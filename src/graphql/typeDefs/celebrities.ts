@@ -3,6 +3,10 @@ import gql from "graphql-tag";
 const typeDefs = gql`
   scalar Date
 
+  type BatchPayload {
+    count: Int
+  }
+
   type Celebrity {
     id: ID!
     name: String!
@@ -27,6 +31,8 @@ const typeDefs = gql`
   type Mutation {
     createCelebrity(celebrity: CelebrityInput!): Celebrity
     updateCelebrity(celebrity: CelebrityInput!): Celebrity
+    deleteCelebrity(id: ID!): Celebrity
+    deleteAllCelebrities: BatchPayload
   }
 `;
 
