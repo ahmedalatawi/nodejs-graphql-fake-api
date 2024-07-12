@@ -1,21 +1,12 @@
-export const createCelebrity = /* GraphQL */ `
-  mutation createCelebrity(
-    $name: String!
-    $bio: String
-    $dateOfBirth: String!
-    $photoUrl: String
-  ) {
-    createCelebrity(
-      name: $name
-      bio: $bio
-      dateOfBirth: $dateOfBirth
-      photoUrl: $photoUrl
-    ) {
-      id
+import gql from "graphql-tag";
+
+export const createCelebrity = gql`
+  mutation createCelebrity($celebrity: CelebrityInput!) {
+    createCelebrity(celebrity: $celebrity) {
       name
       bio
-      dateOfBirth
       photoUrl
+      dateOfBirth
     }
   }
 `;

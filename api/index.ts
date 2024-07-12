@@ -18,10 +18,7 @@ interface MyContext {
 
 const app = express();
 const httpServer = http.createServer(app);
-
-export const prisma = new PrismaClient();
-
-export const server = new ApolloServer<MyContext>({
+const server = new ApolloServer<MyContext>({
   typeDefs,
   resolvers,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
@@ -29,6 +26,8 @@ export const server = new ApolloServer<MyContext>({
 });
 
 const start = async () => {
+  const prisma = new PrismaClient();
+
   await server.start();
   app.use(
     "/graphql",
