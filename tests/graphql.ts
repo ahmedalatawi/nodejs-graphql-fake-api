@@ -10,3 +10,14 @@ export const createCelebrity = gql`
     }
   }
 `;
+
+export const updateCelebrity = gql`
+  mutation updateCelebrity($celebrity: CelebrityInput!) {
+    updateCelebrity(celebrity: $celebrity) {
+      name
+      bio
+      photoUrl
+      dateOfBirth
+    }
+  }
+`;
