@@ -21,3 +21,14 @@ export const updateCelebrity = gql`
     }
   }
 `;
+
+export const deleteCelebrity = gql`
+  mutation deleteCelebrity($id: ID!) {
+    deleteCelebrity(id: $id) {
+      name
+      bio
+      photoUrl
+      dateOfBirth
+    }
+  }
+`;
