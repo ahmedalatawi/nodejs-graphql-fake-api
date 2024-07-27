@@ -1,5 +1,16 @@
 import gql from "graphql-tag";
 
+export const celebrity = gql`
+  query celebrity($id: ID!) {
+    celebrity(id: $id) {
+      name
+      bio
+      photoUrl
+      dateOfBirth
+    }
+  }
+`;
+
 export const createCelebrity = gql`
   mutation createCelebrity($celebrity: CelebrityInput!) {
     createCelebrity(celebrity: $celebrity) {
