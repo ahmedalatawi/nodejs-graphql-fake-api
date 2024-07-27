@@ -1,6 +1,11 @@
 import { prismaTest } from "../../setupTests";
 import { normalizeName } from "../../src/util/functions";
-import { createCelebrity, deleteCelebrity, updateCelebrity } from "../graphql";
+import {
+  createCelebrity,
+  deleteAllCelebrities,
+  deleteCelebrity,
+  updateCelebrity,
+} from "../graphql";
 import { constructTestServer } from "../testServer";
 
 const celebrityMock = {
@@ -141,5 +146,61 @@ describe("deleteCelebrity", () => {
         },
       }
     `);
+  });
+});
+
+describe("deleteAllCelebrities", () => {
+  test("delete all celebrities successfully", async () => {
+    const { server } = constructTestServer({
+      context: () => ({ prisma: prismaTest }),
+    });
+
+    await server.executeOperation({
+      query: createCelebrity,
+      variables: {
+        celebrity: celebrityMock,
+      },
+    });
+
+    await server.executeOperation({
+      query: createCelebrity,
+      variables: {
+        celebrity: { ...celebrityMock, name: "Mike" },
+      },
+    });
+
+    const savedCelebrity1 = await prismaTest.celebrity.findUnique({
+      where: {
+        name: normalizeName(celebrityMock.name),
+      },
+    });
+
+    const savedCelebrity2 = await prismaTest.celebrity.findUnique({
+      where: {
+        name: "mike",
+      },
+    });
+
+    expect(savedCelebrity1).toBeTruthy();
+    expect(savedCelebrity2).toBeTruthy();
+
+    await server.executeOperation({
+      query: deleteAllCelebrities,
+    });
+
+    const deletedCelebrity1 = await prismaTest.celebrity.findUnique({
+      where: {
+        name: normalizeName(celebrityMock.name),
+      },
+    });
+
+    const deletedCelebrity2 = await prismaTest.celebrity.findUnique({
+      where: {
+        name: "mike",
+      },
+    });
+
+    expect(deletedCelebrity1).toBe(null);
+    expect(deletedCelebrity2).toBe(null);
   });
 });

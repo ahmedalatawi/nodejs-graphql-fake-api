@@ -32,3 +32,11 @@ export const deleteCelebrity = gql`
     }
   }
 `;
+
+export const deleteAllCelebrities = gql`
+  mutation deleteAllCelebrities {
+    deleteAllCelebrities {
+      count
+    }
+  }
+`;
