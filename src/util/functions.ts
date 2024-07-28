@@ -2,7 +2,7 @@ import { Celebrity } from "@prisma/client";
 import { PrismaClient } from "@prisma/client";
 import { Celebrity as ICelebrity } from "./types";
 
-const normalizeName = (name: string) => name.trim().toLocaleLowerCase();
+export const normalizeName = (name: string) => name.trim().toLocaleLowerCase();
 
 export async function verifyAndCreateCelebrity(
   celebrity: ICelebrity,
