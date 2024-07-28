@@ -11,6 +11,17 @@ export const celebrity = gql`
   }
 `;
 
+export const celebrities = gql`
+  query celebrities {
+    celebrities {
+      name
+      bio
+      photoUrl
+      dateOfBirth
+    }
+  }
+`;
+
 export const createCelebrity = gql`
   mutation createCelebrity($celebrity: CelebrityInput!) {
     createCelebrity(celebrity: $celebrity) {
