@@ -39,6 +39,16 @@ export async function verifyAndUpdateCelebrity(
     throw new Error("Celebrity ID is required to update a celebrity.");
   }
 
+  const celebrityById = await prisma.celebrity.findUnique({
+    where: {
+      id: celebrityId,
+    },
+  });
+
+  if (!celebrityById) {
+    throw new Error(`Celebrity ID: ${celebrityId} not found.`);
+  }
+
   const celebrityExists = await prisma.celebrity.findUnique({
     where: {
       name: normalizeName(name),
@@ -46,7 +56,7 @@ export async function verifyAndUpdateCelebrity(
   });
 
   if (celebrityExists && celebrityId !== celebrityExists.id) {
-    throw new Error("Name already exists! Try another name.");
+    throw new Error(`Name: ${name} already exists! Try another name.`);
   }
 
   const { id, ...rest } = celebrity;
