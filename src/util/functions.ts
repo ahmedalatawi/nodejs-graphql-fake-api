@@ -35,6 +35,10 @@ export async function verifyAndUpdateCelebrity(
 ): Promise<Celebrity> {
   const { id: celebrityId, name, dateOfBirth } = celebrity;
 
+  if (!celebrityId) {
+    throw new Error("Celebrity ID is required to update a celebrity.");
+  }
+
   const celebrityExists = await prisma.celebrity.findUnique({
     where: {
       name: normalizeName(name),
