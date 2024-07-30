@@ -55,6 +55,36 @@ describe("createCelebrity", () => {
       }
     `);
   });
+
+  test("fail when name already exists", async () => {
+    const { server } = constructTestServer({
+      context: () => ({ prisma: prismaTest }),
+    });
+
+    const res: any = await server.executeOperation({
+      query: createCelebrity,
+      variables: {
+        celebrity: celebrityMock,
+      },
+    });
+
+    expect(res).toMatchInlineSnapshot(`
+      {
+        "data": {
+          "createCelebrity": null,
+        },
+        "errors": [
+          [GraphQLError: Name already exists! Try adding another celebrity.],
+        ],
+        "extensions": undefined,
+        "http": {
+          "headers": Headers {
+            Symbol(map): {},
+          },
+        },
+      }
+    `);
+  });
 });
 
 describe("updateCelebrity", () => {
