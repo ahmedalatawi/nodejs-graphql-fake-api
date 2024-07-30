@@ -96,6 +96,132 @@ describe("updateCelebrity", () => {
       }
     `);
   });
+
+  test("fail when ID is missing", async () => {
+    const { server } = constructTestServer({
+      context: () => ({ prisma: prismaTest }),
+    });
+
+    const res: any = await server.executeOperation({
+      query: updateCelebrity,
+      variables: {
+        celebrity: { ...celebrityMock },
+      },
+    });
+
+    expect(res).toMatchInlineSnapshot(`
+      {
+        "data": {
+          "updateCelebrity": null,
+        },
+        "errors": [
+          [GraphQLError: Celebrity ID is required to update a celebrity.],
+        ],
+        "extensions": undefined,
+        "http": {
+          "headers": Headers {
+            Symbol(map): {},
+          },
+        },
+      }
+    `);
+  });
+
+  test("fail when ID is not found", async () => {
+    const { server } = constructTestServer({
+      context: () => ({ prisma: prismaTest }),
+    });
+
+    const savedCelebrity = await prismaTest.celebrity.findUnique({
+      where: {
+        name: normalizeName(updatedCelebrityMock.name),
+      },
+    });
+
+    const id = savedCelebrity?.id.slice(0, -1) + "1";
+
+    const res: any = await server.executeOperation({
+      query: updateCelebrity,
+      variables: {
+        celebrity: {
+          id,
+          ...celebrityMock,
+        },
+      },
+    });
+
+    expect(res).toMatchInlineSnapshot(`
+      {
+        "data": {
+          "updateCelebrity": null,
+        },
+        "errors": [
+          [GraphQLError: Celebrity ID: ${id} not found.],
+        ],
+        "extensions": undefined,
+        "http": {
+          "headers": Headers {
+            Symbol(map): {},
+          },
+        },
+      }
+    `);
+  });
+
+  test("fail when name already exists", async () => {
+    const { server } = constructTestServer({
+      context: () => ({ prisma: prismaTest }),
+    });
+
+    const savedCelebrity1 = await prismaTest.celebrity.findUnique({
+      where: {
+        name: normalizeName(updatedCelebrityMock.name),
+      },
+    });
+
+    await server.executeOperation({
+      query: createCelebrity,
+      variables: {
+        celebrity: { ...celebrityMock, name: "Paul" },
+      },
+    });
+
+    const savedCelebrity2 = await prismaTest.celebrity.findUnique({
+      where: {
+        name: "paul",
+      },
+    });
+
+    const name = savedCelebrity2?.name;
+
+    const res: any = await server.executeOperation({
+      query: updateCelebrity,
+      variables: {
+        celebrity: {
+          id: savedCelebrity1?.id,
+          ...celebrityMock,
+          name,
+        },
+      },
+    });
+
+    expect(res).toMatchInlineSnapshot(`
+      {
+        "data": {
+          "updateCelebrity": null,
+        },
+        "errors": [
+          [GraphQLError: Name: ${name} already exists! Try another name.],
+        ],
+        "extensions": undefined,
+        "http": {
+          "headers": Headers {
+            Symbol(map): {},
+          },
+        },
+      }
+    `);
+  });
 });
 
 describe("deleteCelebrity", () => {
