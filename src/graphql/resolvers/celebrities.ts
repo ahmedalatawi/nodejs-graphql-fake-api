@@ -13,21 +13,21 @@ import {
 const resolvers = {
   Query: {
     celebrities: async function celebrities(
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       context: GraphQLContext
     ): Promise<Array<Celebrity>> {
       const { prisma } = context;
 
       try {
         return await prisma.celebrity.findMany();
-      } catch (error: any) {
+      } catch (error) {
         console.error("celebrities: ", error);
         throw new GraphQLError(error?.message);
       }
     },
     celebrity: async function celebrity(
-      _: any,
+      _: unknown,
       args: { id: string },
       context: GraphQLContext
     ) {
@@ -40,7 +40,7 @@ const resolvers = {
             id,
           },
         });
-      } catch (error: any) {
+      } catch (error) {
         console.error("celebrity: ", error);
         throw new GraphQLError(error?.message);
       }
@@ -48,7 +48,7 @@ const resolvers = {
   },
   Mutation: {
     createCelebrity: async function createCelebrity(
-      _: any,
+      _: unknown,
       args: { celebrity: ICelebrity },
       context: GraphQLContext
     ): Promise<Celebrity> {
@@ -57,13 +57,13 @@ const resolvers = {
 
       try {
         return await verifyAndCreateCelebrity(celebrity, prisma);
-      } catch (error: any) {
+      } catch (error) {
         console.error("createCelebrity: ", error);
         throw new GraphQLError(error?.message);
       }
     },
     updateCelebrity: async function updateCelebrity(
-      _: any,
+      _: unknown,
       args: { celebrity: ICelebrity },
       context: GraphQLContext
     ): Promise<Celebrity> {
@@ -72,13 +72,13 @@ const resolvers = {
 
       try {
         return await verifyAndUpdateCelebrity(celebrity, prisma);
-      } catch (error: any) {
+      } catch (error) {
         console.error("updateCelebrity: ", error);
         throw new GraphQLError(error?.message);
       }
     },
     deleteCelebrity: async function deleteCelebrity(
-      _: any,
+      _: unknown,
       args: { id: string },
       context: GraphQLContext
     ): Promise<Celebrity> {
@@ -91,21 +91,21 @@ const resolvers = {
             id,
           },
         });
-      } catch (error: any) {
+      } catch (error) {
         console.error("deleteCelebrity: ", error);
         throw new GraphQLError(error?.message);
       }
     },
     deleteAllCelebrities: async function deleteAllCelebrities(
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       context: GraphQLContext
     ): Promise<BatchPayload> {
       const { prisma } = context;
 
       try {
         return await prisma.celebrity.deleteMany({});
-      } catch (error: any) {
+      } catch (error) {
         console.error("deleteAllCelebrities: ", error);
         throw new GraphQLError(error?.message);
       }
