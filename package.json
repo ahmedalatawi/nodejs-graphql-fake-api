@@ -12,7 +12,9 @@
     "start": "node ./dist/api/index.js",
     "dev": "nodemon ./api/index.ts",
     "test": "jest",
-    "lint": "eslint 'src/**/*.{js,ts}'"
+    "lint": "eslint 'src/**/*.{js,ts}'",
+    "generate:prisma": "prisma generate",
+    "prebuild": "yarn generate:prisma"
   },
   "dependencies": {
     "@apollo/server": "^4.3.1",
