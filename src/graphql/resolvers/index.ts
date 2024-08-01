@@ -1,6 +1,5 @@
-import { merge } from "lodash";
 import celebrityResolvers from "./celebrities";
 
-const resolvers = merge({}, celebrityResolvers);
+const resolvers = Object.assign({}, celebrityResolvers);
 
 export default resolvers;
