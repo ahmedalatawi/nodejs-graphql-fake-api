@@ -8,10 +8,18 @@ This is a free online **GraphQL API** for providing fake and reliable data for t
 
 ## Run app locally
 
+### 1. Clone this repo & set up MongoDB
+
+You'll need to set up a MongoDB that supports replica set operations. For example, you can use MongoDB Atlas, see more details [here](https://www.mongodb.com/docs/atlas/).
+
+Create a `.env` file in the project's root directory, and add the database URL as described in `.env.example` file.
+
+### 2. Install dependencies & run app
+
 Run `yarn` to install Node dependencies, and `yarn prisma generate` to generate **Prisma Client**, then:
 
 ### `yarn dev`
 
 Open [http://localhost:4000/graphql](http://localhost:4000/graphql) to view it in the browser.
 
-The is the GraphQL playground page used for testing locally, where you can also find info about the **Schema**, **Mutations**, and **Queries**.
+The is the GraphQL playground page used for testing locally, where you can also find info about the **Schema**, **Mutations**, **Queries**, etc.
