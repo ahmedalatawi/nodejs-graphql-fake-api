@@ -26,6 +26,90 @@ The is the GraphQL playground page used for testing locally, where you can also 
 
 ![](./images/graphql_img.png)
 
+#### Retrieve all celebrities
+
+```graphql
+query {
+  celebrities {
+    id
+    name
+    bio
+    dateOfBirth
+    photoUrl
+  }
+}
+```
+
+<Details>
+
+<Summary><strong>See more API operations</strong></Summary>
+
+#### Retrieve a single celebrity by ID
+
+You can retrieve a single celebrity by passing the id:
+
+```graphql
+query {
+  celebrity(id: "__CELEBRITY_ID__") {
+    id
+    ...
+  }
+}
+```
+
+#### Create a new celebrity
+
+This mutation creates a new celebrity by passing the celebrity object:
+
+```graphql
+mutation {
+  createCelebrity(celebrity: {name: "__NAME__", bio: "__BIO__", dateOfBirth: "__DATE_OF_BIRTH__", photoUrl: "__PHOTO_URL__"}) {
+    id
+    ...
+  }
+}
+```
+
+#### Update an existing celebrity
+
+This mutation updates an existing celebrity by passing the id along with the properties to update:
+
+```graphql
+mutation {
+  updateCelebrity(celebrity: {id: "__ID__", name: "__NAME__", bio: "__BIO__", dateOfBirth: "__DATE_OF_BIRTH__", photoUrl: "__PHOTO_URL__"}) {
+    id
+    ...
+  }
+}
+```
+
+#### Delete an existing celebrity
+
+This mutation deletes an existing celebrity by passing the id:
+
+```graphql
+mutation {
+  deleteCelebrity(id: "__ID__") {
+    id
+    ...
+  }
+}
+```
+
+#### Delete all existing celebrities
+
+This mutation deletes all existing celebrities:
+
+```graphql
+mutation {
+  deleteAllCelebrities {
+    count
+  }
+}
+```
+
+</Details>
+
 ## Run tests locally
 
 ### `yarn test`
