@@ -23,3 +23,15 @@ Run `yarn` to install Node dependencies, and `yarn prisma generate` to generate 
 Open [http://localhost:4000/graphql](http://localhost:4000/graphql) to view it in the browser.
 
 The is the GraphQL playground page used for testing locally, where you can also find info about the **Schema**, **Mutations**, **Queries**, etc.
+
+![](./images/graphql_img.png)
+
+## Run tests locally
+
+### `yarn test`
+
+This runs all unit tests locally.
+
+### Author :books:
+
+[Ahmed Alatawi](https://github.com/AhmedAlatawi)
