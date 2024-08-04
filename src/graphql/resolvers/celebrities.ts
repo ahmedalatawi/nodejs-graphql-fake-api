@@ -101,7 +101,7 @@ const resolvers = {
       const { prisma } = context;
 
       try {
-        return await prisma.celebrity.deleteMany({});
+        return await prisma.celebrity.deleteMany({ where: { editable: true } });
       } catch (error) {
         console.error("deleteAllCelebrities: ", error);
         throw new GraphQLError(error?.message);
