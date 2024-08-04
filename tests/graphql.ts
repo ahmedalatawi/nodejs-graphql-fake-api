@@ -7,6 +7,7 @@ export const celebrity = gql`
       bio
       photoUrl
       dateOfBirth
+      birthPlace
       editable
     }
   }
@@ -19,6 +20,7 @@ export const celebrities = gql`
       bio
       photoUrl
       dateOfBirth
+      birthPlace
       editable
     }
   }
@@ -31,6 +33,7 @@ export const createCelebrity = gql`
       bio
       photoUrl
       dateOfBirth
+      birthPlace
       editable
     }
   }
@@ -43,6 +46,7 @@ export const updateCelebrity = gql`
       bio
       photoUrl
       dateOfBirth
+      birthPlace
       editable
     }
   }
@@ -55,6 +59,7 @@ export const deleteCelebrity = gql`
       bio
       photoUrl
       dateOfBirth
+      birthPlace
       editable
     }
   }
