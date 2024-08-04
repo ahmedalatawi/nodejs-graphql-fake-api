@@ -28,7 +28,7 @@ describe("createCelebrity", () => {
       context: () => ({ prisma: prismaTest }),
     });
 
-    const res: any = await server.executeOperation({
+    const res = await server.executeOperation({
       query: createCelebrity,
       variables: {
         celebrity: celebrityMock,
@@ -62,7 +62,7 @@ describe("createCelebrity", () => {
       context: () => ({ prisma: prismaTest }),
     });
 
-    const res: any = await server.executeOperation({
+    const res = await server.executeOperation({
       query: createCelebrity,
       variables: {
         celebrity: celebrityMock,
@@ -100,7 +100,7 @@ describe("updateCelebrity", () => {
       },
     });
 
-    const res: any = await server.executeOperation({
+    const res = await server.executeOperation({
       query: updateCelebrity,
       variables: {
         celebrity: { id: savedCelebrity?.id, ...updatedCelebrityMock },
@@ -134,7 +134,7 @@ describe("updateCelebrity", () => {
       context: () => ({ prisma: prismaTest }),
     });
 
-    const res: any = await server.executeOperation({
+    const res = await server.executeOperation({
       query: updateCelebrity,
       variables: {
         celebrity: { ...celebrityMock },
@@ -172,7 +172,7 @@ describe("updateCelebrity", () => {
 
     const id = savedCelebrity?.id.slice(0, -1) + "1";
 
-    const res: any = await server.executeOperation({
+    const res = await server.executeOperation({
       query: updateCelebrity,
       variables: {
         celebrity: {
@@ -226,7 +226,7 @@ describe("updateCelebrity", () => {
 
     const name = savedCelebrity2?.name;
 
-    const res: any = await server.executeOperation({
+    const res = await server.executeOperation({
       query: updateCelebrity,
       variables: {
         celebrity: {
@@ -316,7 +316,7 @@ describe("deleteCelebrity", () => {
 
     expect(savedCelebrity).toBeTruthy();
 
-    const res: any = await server.executeOperation({
+    const res = await server.executeOperation({
       query: deleteCelebrity,
       variables: {
         id: savedCelebrity?.id,
@@ -417,6 +417,13 @@ describe("deleteAllCelebrities", () => {
       },
     });
 
+    await server.executeOperation({
+      query: createCelebrity,
+      variables: {
+        celebrity: { ...celebrityMock, name: "Roma", editable: false },
+      },
+    });
+
     const savedCelebrity1 = await prismaTest.celebrity.findUnique({
       where: {
         name: normalizeName(celebrityMock.name),
@@ -429,8 +436,15 @@ describe("deleteAllCelebrities", () => {
       },
     });
 
+    const savedCelebrity3 = await prismaTest.celebrity.findUnique({
+      where: {
+        name: "roma",
+      },
+    });
+
     expect(savedCelebrity1).toBeTruthy();
     expect(savedCelebrity2).toBeTruthy();
+    expect(savedCelebrity3).toBeTruthy();
 
     await server.executeOperation({
       query: deleteAllCelebrities,
@@ -448,7 +462,14 @@ describe("deleteAllCelebrities", () => {
       },
     });
 
+    const deletedCelebrity3 = await prismaTest.celebrity.findUnique({
+      where: {
+        name: "roma",
+      },
+    });
+
     expect(deletedCelebrity1).toBe(null);
     expect(deletedCelebrity2).toBe(null);
+    expect(deletedCelebrity3).toBeTruthy();
   });
 });
