@@ -352,6 +352,49 @@ describe("deleteCelebrity", () => {
       }
     `);
   });
+
+  test("fail when editable flag is false", async () => {
+    const { server } = constructTestServer({
+      context: () => ({ prisma: prismaTest }),
+    });
+
+    await server.executeOperation({
+      query: createCelebrity,
+      variables: {
+        celebrity: { ...celebrityMock, name: "Lura", editable: false },
+      },
+    });
+
+    const savedCelebrity = await prismaTest.celebrity.findUnique({
+      where: {
+        name: "lura",
+      },
+    });
+
+    const res = await server.executeOperation({
+      query: deleteCelebrity,
+      variables: {
+        id: savedCelebrity?.id,
+      },
+    });
+
+    expect(res).toMatchInlineSnapshot(`
+      {
+        "data": {
+          "deleteCelebrity": null,
+        },
+        "errors": [
+          [GraphQLError: Celebrity is not editable so it cannot be deleted.],
+        ],
+        "extensions": undefined,
+        "http": {
+          "headers": Headers {
+            Symbol(map): {},
+          },
+        },
+      }
+    `);
+  });
 });
 
 describe("deleteAllCelebrities", () => {
