@@ -36,6 +36,7 @@ query {
     bio
     dateOfBirth
     photoUrl
+    editable
   }
 }
 ```
@@ -63,7 +64,7 @@ This mutation creates a new celebrity by passing the celebrity object:
 
 ```graphql
 mutation {
-  createCelebrity(celebrity: {name: "__NAME__", bio: "__BIO__", dateOfBirth: "__DATE_OF_BIRTH__", photoUrl: "__PHOTO_URL__"}) {
+  createCelebrity(celebrity: {name: "__NAME__", bio: "__BIO__", dateOfBirth: "__DATE_OF_BIRTH__", photoUrl: "__PHOTO_URL__", editable: "__EDITABLE__"}) {
     id
     ...
   }
