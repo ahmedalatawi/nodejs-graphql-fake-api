@@ -17,6 +17,7 @@ model Celebrity {
   bio            String?
   dateOfBirth    DateTime
   photoUrl       String?
+  editable       Boolean?
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 }

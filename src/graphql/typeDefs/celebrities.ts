@@ -1,5 +1,13 @@
 import gql from "graphql-tag";
 
+const CelebrityInput = `
+  id: ID
+  name: String!
+  bio: String
+  dateOfBirth: Date!
+  photoUrl: String
+`;
+
 const typeDefs = gql`
   scalar Date
 
@@ -13,14 +21,16 @@ const typeDefs = gql`
     bio: String
     dateOfBirth: Date!
     photoUrl: String
+    editable: Boolean
   }
 
-  input CelebrityInput {
-    id: ID
-    name: String!
-    bio: String
-    dateOfBirth: Date!
-    photoUrl: String
+  input UpdateCelebrityInput {
+    ${CelebrityInput}
+  }
+
+  input CreateCelebrityInput {
+    ${CelebrityInput}
+    editable: Boolean
   }
 
   type Query {
@@ -29,8 +39,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createCelebrity(celebrity: CelebrityInput!): Celebrity
-    updateCelebrity(celebrity: CelebrityInput!): Celebrity
+    createCelebrity(celebrity: CreateCelebrityInput!): Celebrity
+    updateCelebrity(celebrity: UpdateCelebrityInput!): Celebrity
     deleteCelebrity(id: ID!): Celebrity
     deleteAllCelebrities: BatchPayload
   }

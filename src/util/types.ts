@@ -6,6 +6,7 @@ export interface Celebrity {
   bio: string;
   dateOfBirth: string;
   photoUrl: string;
+  editable: boolean;
 }
 
 export interface GraphQLContext {

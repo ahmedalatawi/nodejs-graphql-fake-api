@@ -2,6 +2,7 @@ import { Celebrity } from "@prisma/client";
 import { GraphQLError } from "graphql";
 import {
   verifyAndCreateCelebrity,
+  verifyAndDeleteCelebrity,
   verifyAndUpdateCelebrity,
 } from "../../util/functions";
 import {
@@ -86,11 +87,7 @@ const resolvers = {
       const { id } = args;
 
       try {
-        return await prisma.celebrity.delete({
-          where: {
-            id,
-          },
-        });
+        return await verifyAndDeleteCelebrity(id, prisma);
       } catch (error) {
         console.error("deleteCelebrity: ", error);
         throw new GraphQLError(error?.message);

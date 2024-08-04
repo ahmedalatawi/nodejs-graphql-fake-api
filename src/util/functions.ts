@@ -25,6 +25,7 @@ export async function verifyAndCreateCelebrity(
       ...celebrity,
       name: normalizeName(name),
       dateOfBirth: new Date(dateOfBirth),
+      editable: celebrity.editable ?? true,
     },
   });
 }
@@ -49,6 +50,10 @@ export async function verifyAndUpdateCelebrity(
     throw new Error(`Celebrity ID: ${celebrityId} not found.`);
   }
 
+  if (!celebrityById.editable) {
+    throw new Error("Celebrity is not editable.");
+  }
+
   const celebrityExists = await prisma.celebrity.findUnique({
     where: {
       name: normalizeName(name),
@@ -69,6 +74,31 @@ export async function verifyAndUpdateCelebrity(
       ...rest,
       name: normalizeName(name),
       dateOfBirth: new Date(dateOfBirth),
+    },
+  });
+}
+
+export async function verifyAndDeleteCelebrity(
+  celebrityId: string,
+  prisma: PrismaClient
+): Promise<Celebrity> {
+  const celebrity = await prisma.celebrity.findUnique({
+    where: {
+      id: celebrityId,
+    },
+  });
+
+  if (!celebrity) {
+    throw new Error(`Celebrity ID: ${celebrityId} not found.`);
+  }
+
+  if (!celebrity.editable) {
+    throw new Error("Celebrity is not editable so it cannot be deleted.");
+  }
+
+  return await prisma.celebrity.delete({
+    where: {
+      id: celebrityId,
     },
   });
 }
