@@ -41,6 +41,7 @@ describe("createCelebrity", () => {
           "createCelebrity": {
             "bio": "My name is Alex",
             "dateOfBirth": 1980-01-01T00:00:00.000Z,
+            "editable": true,
             "name": "alex",
             "photoUrl": "alex-photo-url",
           },
@@ -112,6 +113,7 @@ describe("updateCelebrity", () => {
           "updateCelebrity": {
             "bio": "My name is Mike",
             "dateOfBirth": 1980-02-02T00:00:00.000Z,
+            "editable": true,
             "name": "mike",
             "photoUrl": "mike-photo-url",
           },
@@ -289,6 +291,7 @@ describe("deleteCelebrity", () => {
           "deleteCelebrity": {
             "bio": "My name is Mike",
             "dateOfBirth": 1980-02-02T00:00:00.000Z,
+            "editable": true,
             "name": "mike",
             "photoUrl": "mike-photo-url",
           },

@@ -15,6 +15,7 @@ const celebrityMock2 = {
   bio: "My name is Mike",
   dateOfBirth: "1980-02-02",
   photoUrl: "mike-photo-url",
+  editable: false,
 };
 
 describe("celebrity", () => {
@@ -49,6 +50,7 @@ describe("celebrity", () => {
           "celebrity": {
             "bio": "My name is Alex",
             "dateOfBirth": 1980-01-01T00:00:00.000Z,
+            "editable": true,
             "name": "alex",
             "photoUrl": "alex-photo-url",
           },
@@ -88,12 +90,14 @@ describe("celebrities", () => {
         dateOfBirth: res.data?.celebrities[0].dateOfBirth,
         name: "alex",
         photoUrl: "alex-photo-url",
+        editable: true,
       },
       {
         bio: "My name is Mike",
         dateOfBirth: res.data?.celebrities[1].dateOfBirth,
         name: "mike",
         photoUrl: "mike-photo-url",
+        editable: false,
       },
     ]);
   });

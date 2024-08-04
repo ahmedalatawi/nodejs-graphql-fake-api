@@ -7,6 +7,7 @@ export const celebrity = gql`
       bio
       photoUrl
       dateOfBirth
+      editable
     }
   }
 `;
@@ -18,28 +19,31 @@ export const celebrities = gql`
       bio
       photoUrl
       dateOfBirth
+      editable
     }
   }
 `;
 
 export const createCelebrity = gql`
-  mutation createCelebrity($celebrity: CelebrityInput!) {
+  mutation createCelebrity($celebrity: CreateCelebrityInput!) {
     createCelebrity(celebrity: $celebrity) {
       name
       bio
       photoUrl
       dateOfBirth
+      editable
     }
   }
 `;
 
 export const updateCelebrity = gql`
-  mutation updateCelebrity($celebrity: CelebrityInput!) {
+  mutation updateCelebrity($celebrity: UpdateCelebrityInput!) {
     updateCelebrity(celebrity: $celebrity) {
       name
       bio
       photoUrl
       dateOfBirth
+      editable
     }
   }
 `;
@@ -51,6 +55,7 @@ export const deleteCelebrity = gql`
       bio
       photoUrl
       dateOfBirth
+      editable
     }
   }
 `;
