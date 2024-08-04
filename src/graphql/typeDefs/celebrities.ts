@@ -5,6 +5,7 @@ const CelebrityInput = `
   name: String!
   bio: String
   dateOfBirth: Date!
+  birthPlace: String
   photoUrl: String
 `;
 
@@ -20,6 +21,7 @@ const typeDefs = gql`
     name: String!
     bio: String
     dateOfBirth: Date!
+    birthPlace: String
     photoUrl: String
     editable: Boolean
   }

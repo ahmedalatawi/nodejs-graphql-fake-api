@@ -16,6 +16,7 @@ model Celebrity {
   name           String    @unique
   bio            String?
   dateOfBirth    DateTime
+  birthPlace     String?
   photoUrl       String?
   editable       Boolean?
   createdAt      DateTime  @default(now())

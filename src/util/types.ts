@@ -5,6 +5,7 @@ export interface Celebrity {
   name: string;
   bio: string;
   dateOfBirth: string;
+  birthPlace: string;
   photoUrl: string;
   editable: boolean;
 }
