@@ -24,7 +24,7 @@ Open [http://localhost:4000/graphql](http://localhost:4000/graphql) to view it i
 
 The is the GraphQL playground page used for testing locally, where you can also find info about the **Schema**, **Mutations**, **Queries**, etc.
 
-![](./images/graphql_img.png)
+![](./images/image.png)
 
 #### Retrieve all celebrities
 
