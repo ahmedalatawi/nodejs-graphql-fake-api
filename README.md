@@ -35,6 +35,7 @@ query {
     name
     bio
     dateOfBirth
+    birthPlace
     photoUrl
     editable
   }
@@ -64,7 +65,7 @@ This mutation creates a new celebrity by passing the celebrity object:
 
 ```graphql
 mutation {
-  createCelebrity(celebrity: {name: "__NAME__", bio: "__BIO__", dateOfBirth: "__DATE_OF_BIRTH__", photoUrl: "__PHOTO_URL__", editable: "__EDITABLE__"}) {
+  createCelebrity(celebrity: {name: "__NAME__", bio: "__BIO__", dateOfBirth: "__DATE_OF_BIRTH__", birthPlace: "__BIRTH_PLACE__", photoUrl: "__PHOTO_URL__", editable: "__EDITABLE__"}) {
     id
     ...
   }
@@ -77,7 +78,7 @@ This mutation updates an existing celebrity by passing the id along with the pro
 
 ```graphql
 mutation {
-  updateCelebrity(celebrity: {id: "__ID__", name: "__NAME__", bio: "__BIO__", dateOfBirth: "__DATE_OF_BIRTH__", photoUrl: "__PHOTO_URL__"}) {
+  updateCelebrity(celebrity: {id: "__ID__", name: "__NAME__", bio: "__BIO__", dateOfBirth: "__DATE_OF_BIRTH__", birthPlace: "__BIRTH_PLACE__", photoUrl: "__PHOTO_URL__"}) {
     id
     ...
   }
