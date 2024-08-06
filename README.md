@@ -4,7 +4,11 @@
 
 This is a free online **GraphQL API** for providing fake and reliable data for testing and prototyping. It's built with NodeJS, GraphQL, TypeScript, MongoDB and Prisma (see demo documentation [here](https://documenter.getpostman.com/view/35959656/2sA3kdBdBt)).
 
+The API currently returns the top 45 most popular and none-editable actores and actresses. See demo below:
+
 ### [Demo using Postman](https://www.postman.com/altimetry-geoscientist-3938507/workspace/fake-api-data-provider-workspace/collection/35959656-ba1f465c-25fe-412f-875e-bac82c85157c?action=share&creator=35959656) :movie_camera:
+
+**_Feel free to add, edit, or delete your own celebrities as you wish._**
 
 ## Run app locally
 
